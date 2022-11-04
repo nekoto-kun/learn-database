@@ -2,83 +2,69 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
     public function insert()
     {
-        DB::table('books')->insert([
+        // $book = new Book();
+
+        // $book->judul = "Buku #1";
+        // $book->halaman = 100;
+        // $book->penerbit = "ANDI";
+        // $book->harga = 100000;
+        // $book->isbn = "1234567890123";
+        // $book->kategori = "Undang-Undang";
+
+        // $book->save();
+
+        Book::create(
             [
                 'judul' => 'The Bench',
-                'ISBN' => '9780593434512',
+                'isbn' => '9780593434412',
                 'kategori' => 'Growing Up & Facts of Life',
                 'harga' => 181500,
                 'halaman' => 40,
                 'penerbit' => 'Random House Books for Young Readers'
-            ],
-            [
-                'judul' => 'Economic Dignity',
-                'ISBN' => '9781984879875',
-                'kategori' => 'Business & Leadership',
-                'harga' => 222900,
-                'halaman' => 384,
-                'penerbit' => 'Penguin Press'
-            ],
-            [
-                'judul' => 'Food by Fire: Grilling and BBQ with Derek Wolf of Over the Fire Cooking',
-                'ISBN' => '9781592339754',
-                'kategori' => 'Meat Cooking',
-                'harga' => 310750,
-                'halaman' => 208,
-                'penerbit' => 'Harvard Common Press'
-            ],
-            [
-                'judul' => 'The 4-Hour Workweek: Escape 9-5, Live Anywhere, and Join the
-New Rich',
-                'ISBN' => '9780307465351',
-                'kategori' => 'Self-Improvement',
-                'harga' => 253500,
-                'halaman' => 448,
-                'penerbit' => 'Harmony'
             ]
-        ]);
-    }
-
-    public function select()
-    {
-        $result = DB::table('books')->get();
-        dump($result);
-
-        $result2 = DB::table('books')->where('halaman', '<', 300)->orderBy('harga', 'desc')->get();
-        dump($result2);
-
-        $result3 = DB::table('books')->select(['judul', 'harga'])->get();
-        dump($result3);
-
-        $result4 = DB::table('books')->skip(1)->take(2)->get();
-        dump($result4);
-
-        $result5 = DB::table('books')->where('halaman', '<', 300)->orderBy('harga', 'desc')->first();
-        dump($result5->harga);
+        );
     }
 
     public function update()
     {
-        $result = DB::table('books')->where('ISBN', '9781592339754')
-            ->update(
-                [
-                    'kategori' => 'Cooking',
-                    'harga' => 210000,
-                    'updated_at' => now(),
-                ]
-            );
-        dump($result);
+        // $book = Book::find(1);
+        // $book->judul = "Buku Bagus";
+        // $book->harga = 250000;
+
+        // $book = Book::where('isbn', '1234567890123')->first();
+        // $book->judul = "Buku Jelek";
+        // $book->harga = 350000;
+        // $book->save();
+
+        Book::where('isbn', '1234567890123')->first()->update([
+            'judul' => "Buku Bagus",
+            'harga' => 100000
+        ]);
     }
 
     public function delete()
     {
-        DB::table('books')->where('harga', '>', 200000)->delete();
+        // Book::find(1)->delete();
+        echo Book::destroy(1);
+    }
+
+    public function select()
+    {
+        // $result = Book::all();
+        // $result = Book::where('harga', '<', 200000)->get();
+        $result = Book::latest()->get();
+
+        foreach ($result as $book) {
+            echo "Judul buku: " . $book->judul . "<br>";
+        }
+
+        dump($result);
     }
 }

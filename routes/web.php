@@ -1,26 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\BookController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/insert', [App\Http\Controllers\BookController::class, 'insert']);
-
-Route::get('/select', [App\Http\Controllers\BookController::class, 'select']);
-
-Route::get('/update', [App\Http\Controllers\BookController::class, 'update']);
-
-Route::get('/delete', [App\Http\Controllers\BookController::class, 'delete']);
+Route::get('/insert', [BookController::class, 'insert']);
+Route::get('/update', [BookController::class, 'update']);
+Route::get('/delete', [BookController::class, 'delete']);
+Route::get('/select', [BookController::class, 'select']);

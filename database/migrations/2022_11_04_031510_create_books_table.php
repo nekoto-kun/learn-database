@@ -15,12 +15,12 @@ class CreateBooksTable extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
-            $table->smallInteger('halaman');
-            $table->string('isbn', 13);
-            $table->string('kategori');
-            $table->string('penerbit');
-            $table->double('harga', 8, 2);
+            $table->string('judul', 255);
+            $table->char('ISBN', 13)->unique();
+            $table->string('kategori', 255);
+            $table->bigInteger('harga');
+            $table->integer('halaman');
+            $table->string('penerbit', 255);
             $table->timestamps();
         });
     }
