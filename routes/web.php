@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\BookController::class, 'index']);
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::get('/insert', [App\Http\Controllers\BookController::class, 'insert']);
+
+Route::get('/select', [App\Http\Controllers\BookController::class, 'select']);
+
+Route::get('/update', [App\Http\Controllers\BookController::class, 'update']);
+
+Route::get('/delete', [App\Http\Controllers\BookController::class, 'delete']);
