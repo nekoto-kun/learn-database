@@ -51,20 +51,26 @@ class BookController extends Controller
 
     public function delete()
     {
-        // Book::find(1)->delete();
-        echo Book::destroy(1);
+        Book::find(1)->delete();
+        // echo Book::destroy(1);
     }
 
     public function select()
     {
         // $result = Book::all();
         // $result = Book::where('harga', '<', 200000)->get();
-        $result = Book::latest()->get();
+        // $result = Book::latest()->get();
+        $result = Book::withTrashed()->get();
 
         foreach ($result as $book) {
             echo "Judul buku: " . $book->judul . "<br>";
         }
 
         dump($result);
+    }
+
+    public function restore()
+    {
+        Book::withTrashed()->find(1)->restore();
     }
 }

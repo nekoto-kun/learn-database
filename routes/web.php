@@ -11,3 +11,4 @@ Route::get('/insert', [BookController::class, 'insert']);
 Route::get('/update', [BookController::class, 'update']);
 Route::get('/delete', [BookController::class, 'delete']);
 Route::get('/select', [BookController::class, 'select']);
+Route::get('/restore', [BookController::class, 'restore']);
