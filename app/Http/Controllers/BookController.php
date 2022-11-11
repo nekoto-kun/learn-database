@@ -7,70 +7,34 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    public function insert()
-    {
-        // $book = new Book();
-
-        // $book->judul = "Buku #1";
-        // $book->halaman = 100;
-        // $book->penerbit = "ANDI";
-        // $book->harga = 100000;
-        // $book->isbn = "1234567890123";
-        // $book->kategori = "Undang-Undang";
-
-        // $book->save();
-
-        Book::create(
-            [
-                'judul' => 'The Bench',
-                'isbn' => '9780593434412',
-                'kategori' => 'Growing Up & Facts of Life',
-                'harga' => 181500,
-                'halaman' => 40,
-                'penerbit' => 'Random House Books for Young Readers'
-            ]
-        );
-    }
-
-    public function update()
-    {
-        // $book = Book::find(1);
-        // $book->judul = "Buku Bagus";
-        // $book->harga = 250000;
-
-        // $book = Book::where('isbn', '1234567890123')->first();
-        // $book->judul = "Buku Jelek";
-        // $book->harga = 350000;
-        // $book->save();
-
-        Book::where('isbn', '1234567890123')->first()->update([
-            'judul' => "Buku Bagus",
-            'harga' => 100000
-        ]);
-    }
-
-    public function delete()
-    {
-        Book::find(1)->delete();
-        // echo Book::destroy(1);
-    }
-
     public function select()
     {
-        // $result = Book::all();
-        // $result = Book::where('harga', '<', 200000)->get();
-        // $result = Book::latest()->get();
-        $result = Book::withTrashed()->get();
+        // $book = Book::find(4);
+        // // dump($book);
+        // // dump($book->selling);
 
-        foreach ($result as $book) {
-            echo "Judul buku: " . $book->judul . "<br>";
-        }
+        // echo "<h3>" . $book->judul . "</h3>";
+        // echo "<p>";
+        // echo "Harga: " . $book->harga . "<br>";
+        // echo "Halaman: " . $book->halaman . "<br>";
+        // echo "Pendapatan penjualan: " . $book->selling->acc_earnings . "<br>";
+        // echo "Buku terjual: " . $book->selling->acc_sold_count . "<br>";
+        // echo "Rata-rata nilai jual buku: " . ($book->selling->acc_earnings / $book->selling->acc_sold_count);
+        // echo "</p>";
 
-        dump($result);
-    }
+        $allBooks = Book::all();
+        dump($allBooks);
+        $allBooks = Book::with('selling')->get();
+        dump($allBooks);
 
-    public function restore()
-    {
-        Book::withTrashed()->find(1)->restore();
+        $allBooks = Book::with('selling')->has('selling')->get();
+        dump($allBooks);
+        $allBooks = Book::doesntHave('selling')->get();
+        dump($allBooks);
+
+        $allBooks = Book::whereHas('selling', function ($row) {
+            $row->where('acc_earnings', '<', 1000000);
+        })->get();
+        dump($allBooks);
     }
 }

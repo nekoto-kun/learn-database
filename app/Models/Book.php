@@ -13,4 +13,9 @@ class Book extends Model
 
     // protected $fillable = ['judul', 'isbn', 'kategori', 'harga', 'halaman', 'penerbit'];
     protected $guarded = [];
+
+    public function selling()
+    {
+        return $this->hasOne('App\Models\Selling');
+    }
 }
