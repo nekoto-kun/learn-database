@@ -10,4 +10,9 @@ class Selling extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function book()
+    {
+        return $this->belongsTo('App\Models\Book');
+    }
 }

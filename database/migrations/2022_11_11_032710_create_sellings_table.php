@@ -20,7 +20,7 @@ class CreateSellingsTable extends Migration
             $table->unsignedBigInteger('book_id')->unique();
             $table->timestamps();
 
-            $table->foreign('book_id')->references('id')->on('books');
+            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
         });
     }
 

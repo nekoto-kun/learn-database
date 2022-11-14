@@ -22,7 +22,7 @@ class CreateBooksTable extends Migration
             $table->integer('halaman');
             // $table->string('penerbit', 255);
             $table->timestamps();
-            $table->softDeletes();
+            // $table->softDeletes();
         });
     }
 
