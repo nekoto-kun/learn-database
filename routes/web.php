@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SellingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +19,13 @@ Route::get('/', function () {
 });
 
 Route::get('/insert', [App\Http\Controllers\BookController::class, 'insert']);
-
 Route::get('/select', [App\Http\Controllers\BookController::class, 'select']);
-
 Route::get('/update', [App\Http\Controllers\BookController::class, 'update']);
-
 Route::get('/delete', [App\Http\Controllers\BookController::class, 'delete']);
+
+Route::prefix('/selling')->group(function () {
+    Route::get('/select', [SellingController::class, 'select']);
+    Route::get('/insert', [SellingController::class, 'insert']);
+    Route::get('/update', [SellingController::class, 'update']);
+    Route::get('/delete', [SellingController::class, 'delete']);
+});
