@@ -21,7 +21,7 @@ class CreateBooksTable extends Migration
             $table->bigInteger('harga');
             $table->integer('halaman');
             // $table->string('penerbit', 255);
-            $table->unsignedBigInteger('author_id');
+            $table->unsignedBigInteger('author_id')->nullable();
             $table->timestamps();
             // $table->softDeletes();
 

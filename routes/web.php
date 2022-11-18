@@ -15,6 +15,8 @@ Route::prefix('/book')->group(function () {
     Route::get('/delete', [BookController::class, 'delete']);
     Route::get('/select', [BookController::class, 'select']);
     Route::get('/restore', [BookController::class, 'restore']);
+
+    Route::get('/dissociate', [BookController::class, 'dissociate']);
 });
 
 Route::prefix('/selling')->group(function () {

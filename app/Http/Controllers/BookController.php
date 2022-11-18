@@ -105,4 +105,11 @@ class BookController extends Controller
         // }
         $book->delete();
     }
+
+    public function dissociate()
+    {
+        $book = Book::find(2);
+        $book->author()->dissociate();
+        $book->save();
+    }
 }
