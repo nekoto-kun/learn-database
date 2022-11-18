@@ -20,9 +20,12 @@ class CreateBooksTable extends Migration
             // $table->string('kategori', 255);
             $table->bigInteger('harga');
             $table->integer('halaman');
+            $table->unsignedBigInteger('author_id')->nullable();
             // $table->string('penerbit', 255);
             $table->timestamps();
             // $table->softDeletes();
+
+            $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
         });
     }
 

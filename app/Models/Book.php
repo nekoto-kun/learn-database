@@ -18,4 +18,9 @@ class Book extends Model
     {
         return $this->hasOne('App\Models\Selling');
     }
+
+    public function author()
+    {
+        return $this->belongsTo('App\Models\Author');
+    }
 }

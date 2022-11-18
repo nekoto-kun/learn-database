@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Author;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 
@@ -22,12 +23,21 @@ class DatabaseSeeder extends Seeder
         $faker = Faker::create('id_ID');
         $faker->seed(123);
 
+        for ($i = 0; $i < 4; $i++) {
+            Author::create([
+                "nama" => $faker->firstName . " " . $faker->lastName,
+                "kota" => $faker->city,
+                "negara" => $faker->country
+            ]);
+        }
+
         for ($i = 0; $i < 10; $i++) {
             Book::create(
                 [
                     'judul' => $faker->sentence,
                     'harga' => $faker->randomFloat(0, 10000, 1000000),
                     'halaman' => $faker->randomNumber(3),
+                    'author_id' => $faker->numberBetween(1, 4)
                 ]
             );
         }
@@ -37,7 +47,7 @@ class DatabaseSeeder extends Seeder
                 [
                     'acc_earnings' => $faker->randomFloat(0, 0, 2000000),
                     'acc_sold_count' => $faker->randomNumber(3),
-                    'book_id' => $faker->unique()->randomDigit,
+                    'book_id' => $faker->unique()->numberBetween(1, 10)
                 ]
             );
         }

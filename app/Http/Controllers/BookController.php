@@ -87,4 +87,11 @@ class BookController extends Controller
         }
         echo "</ol>";
     }
+
+    public function dissociate()
+    {
+        $book = Book::find(1);
+        $book->author()->dissociate();
+        $book->save();
+    }
 }

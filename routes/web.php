@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\SellingController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,9 +24,18 @@ Route::get('/select', [App\Http\Controllers\BookController::class, 'select']);
 Route::get('/update', [App\Http\Controllers\BookController::class, 'update']);
 Route::get('/delete', [App\Http\Controllers\BookController::class, 'delete']);
 
+Route::get('/dissociate', [App\Http\Controllers\BookController::class, 'dissociate']);
+
 Route::prefix('/selling')->group(function () {
     Route::get('/select', [SellingController::class, 'select']);
     Route::get('/insert', [SellingController::class, 'insert']);
     Route::get('/update', [SellingController::class, 'update']);
     Route::get('/delete', [SellingController::class, 'delete']);
+});
+
+Route::prefix('/author')->group(function () {
+    Route::get('/select', [AuthorController::class, 'select']);
+    Route::get('/insert', [AuthorController::class, 'insert']);
+    Route::get('/update', [AuthorController::class, 'update']);
+    Route::get('/delete', [AuthorController::class, 'delete']);
 });
