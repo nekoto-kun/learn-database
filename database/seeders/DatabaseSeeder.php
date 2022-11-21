@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 
 use App\Models\Book;
+use App\Models\Category;
 use App\Models\Selling;
 
 class DatabaseSeeder extends Seeder
@@ -28,6 +29,45 @@ class DatabaseSeeder extends Seeder
                 "negara" => $faker->country
             ]);
         }
+
+        Category::create(
+            [
+                'kode' => 'AA001',
+                'nama' => 'Horor',
+                'deskripsi' => 'Horor berisi kisah-kisah yang tergolong mengerikan dan menyeramkan.',
+            ]
+        );
+        Category::create(
+            [
+                'kode' => 'AB002',
+                'nama' => 'Fiksi Ilmiah',
+                'deskripsi' => 'Fiksi ilmiah merupakan kisah-kisah imajinasi dengan dasar ilmu
+           pengetahuan.',
+            ]
+        );
+        Category::create(
+            [
+                'kode' => 'AC003',
+                'nama' => 'Lifestyle',
+                'deskripsi' => 'Lifestyle merupakan kisah-kisah tentang gaya hidup.',
+            ]
+        );
+        Category::create(
+            [
+                'kode' => 'AD004',
+                'nama' => 'Romantis',
+                'deskripsi' => 'Romantis merupakan kisah-kisah yang memuat nuansa romantis atau
+           kemesraan.',
+            ]
+        );
+        Category::create(
+            [
+                'kode' => 'AE005',
+                'nama' => 'Petualangan',
+                'deskripsi' => 'Petualangan memuat kisah-kisah eksplorasi, penjelajahan, atau menemukan
+           sesuatu yang baru dalam perjalanan.',
+            ]
+        );
 
         for ($i = 0; $i < 10; $i++) {
             Book::create(

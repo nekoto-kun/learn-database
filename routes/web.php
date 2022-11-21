@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SellingController;
 
 Route::get('/', function () {
@@ -17,6 +18,12 @@ Route::prefix('/book')->group(function () {
     Route::get('/restore', [BookController::class, 'restore']);
 
     Route::get('/dissociate', [BookController::class, 'dissociate']);
+
+    Route::get('/attach', [BookController::class, 'attach']);
+    Route::get('/detach', [BookController::class, 'detach']);
+    Route::get('/sync', [BookController::class, 'sync']);
+    Route::get('/toggle', [BookController::class, 'toggle']);
+    Route::get('/delete2', [BookController::class, 'delete2']);
 });
 
 Route::prefix('/selling')->group(function () {
@@ -32,3 +39,5 @@ Route::prefix('/author')->group(function () {
     Route::get('/update', [AuthorController::class, 'update']);
     Route::get('/delete', [AuthorController::class, 'delete']);
 });
+
+Route::get('/pivot', [CategoryController::class, 'pivot']);

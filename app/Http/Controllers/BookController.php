@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Category;
 use App\Models\Selling;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
+    // One-to-one
     public function select()
     {
         // $book = Book::find(4);
@@ -106,10 +108,62 @@ class BookController extends Controller
         $book->delete();
     }
 
+    // One-to-many
     public function dissociate()
     {
         $book = Book::find(2);
         $book->author()->dissociate();
         $book->save();
+    }
+
+    // Many-to-Many
+    public function attach()
+    {
+        // One attach
+        $book = Book::find(2);
+        $category = Category::find(1);
+
+        $book->categories()->attach($category);
+
+        echo "Buku yang berjudul " . $book->judul . " masuk ke kategori <b>" . $category->nama . "</b>";
+
+        // Multiple attach
+        $book2 = Book::find(5);
+        $categories = Category::find([1, 2, 4]);
+
+        $book2->categories()->attach($categories);
+    }
+
+    public function detach()
+    {
+        $book = Book::find(2);
+        $category = Category::find(1);
+
+        $book->categories()->detach($category);
+        echo "$book->judul dihapus dari kategori <b>$category->nama</b>";
+    }
+
+    public function sync()
+    {
+        $book = Book::find(7);
+        $categories = Category::find([1, 4]);
+
+        // Sync and auto-detach if exists
+        // $book->categories()->sync($categories);
+
+        // Sync without detaching
+        $book->categories()->syncWithoutDetaching($categories);
+    }
+
+    public function toggle()
+    {
+        $book = Book::find(7);
+        $book->categories()->toggle(Category::find(1));
+    }
+
+    public function delete2()
+    {
+        $book = Book::find(7);
+        $book->delete();
     }
 }
