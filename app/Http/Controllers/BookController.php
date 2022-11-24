@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Category;
 use App\Models\Selling;
 use Illuminate\Http\Request;
 
@@ -53,7 +54,7 @@ class BookController extends Controller
 
     public function delete()
     {
-        $book = Book::find(3);
+        $book = Book::find(1);
         // $book->selling->delete();
         if ($book) {
             $book->delete();
@@ -93,5 +94,30 @@ class BookController extends Controller
         $book = Book::find(1);
         $book->author()->dissociate();
         $book->save();
+    }
+
+    public function attach()
+    {
+        $book = Book::find(1);
+        $book->categories()->attach(Category::find(1));
+
+        $book2 = Book::find(2);
+        $book2->categories()->attach(Category::find([1, 2, 3]));
+    }
+
+    public function detach()
+    {
+        $book = Book::find(2);
+        $book->categories()->detach(Category::find(2));
+    }
+
+    public function sync()
+    {
+        $book = Book::find(1);
+        // $book->categories()->sync(Category::find([2, 4]));
+        $book->categories()->syncWithoutDetaching(Category::find([1, 2, 3]));
+
+        $book2 = Book::find(10);
+        $book2->categories()->toggle(Category::find([1, 3]));
     }
 }

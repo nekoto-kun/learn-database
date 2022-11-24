@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\SellingController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,12 +21,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/insert', [App\Http\Controllers\BookController::class, 'insert']);
-Route::get('/select', [App\Http\Controllers\BookController::class, 'select']);
-Route::get('/update', [App\Http\Controllers\BookController::class, 'update']);
-Route::get('/delete', [App\Http\Controllers\BookController::class, 'delete']);
+Route::get('/insert', [BookController::class, 'insert']);
+Route::get('/select', [BookController::class, 'select']);
+Route::get('/update', [BookController::class, 'update']);
+Route::get('/delete', [BookController::class, 'delete']);
 
-Route::get('/dissociate', [App\Http\Controllers\BookController::class, 'dissociate']);
+Route::get('/dissociate', [BookController::class, 'dissociate']);
+
+Route::get('/attach', [BookController::class, 'attach']);
+Route::get('/detach', [BookController::class, 'detach']);
+Route::get('/sync', [BookController::class, 'sync']);
+
+Route::get('/pivot', [CategoryController::class, 'pivot']);
 
 Route::prefix('/selling')->group(function () {
     Route::get('/select', [SellingController::class, 'select']);

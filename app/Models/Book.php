@@ -23,4 +23,9 @@ class Book extends Model
     {
         return $this->belongsTo('App\Models\Author');
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany('App\Models\Category')->withTimestamps();
+    }
 }
