@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Author;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 
+use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\Selling;

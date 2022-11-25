@@ -12,6 +12,11 @@ class SellingController extends Controller
     {
         $selling = Selling::find(5);
         echo $selling->acc_sold_count . " buku <b>" . $selling->book->judul . "</b> terjual.";
+
+        $allSellings = Selling::all();
+        foreach ($allSellings as $selling) {
+            echo "Buku " . $selling->book->judul . " terjual " . $selling->acc_sold_count . " buah<br>";
+        }
     }
 
     public function insert()

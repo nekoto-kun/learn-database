@@ -22,6 +22,7 @@ class AuthorController extends Controller
                 <th>Book List</th>
             </tr>
         </thead>";
+
         echo "<tbody>";
 
         foreach ($allAuthors as $author) {

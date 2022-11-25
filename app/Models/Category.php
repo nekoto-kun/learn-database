@@ -9,6 +9,8 @@ class Category extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function books()
     {
         return $this->belongsToMany('App\Models\Book')->withTimestamps();
